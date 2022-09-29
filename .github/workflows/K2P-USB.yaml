@@ -29,13 +29,13 @@ jobs:
 
           # build-in smartdns
           mkdir -p user/smartdns
-          wget -P user/smartdns/ https://raw.githubusercontent.com/felix-fly/v2ray-padavan-doh/master/padavan/smartdns/Makefile
+          wget https://raw.githubusercontent.com/felix-fly/v2ray-padavan-doh/master/padavan/smartdns/Makefile -O user/smartdns/Makefile
           wget https://raw.githubusercontent.com/felix-fly/v2ray-padavan-doh/master/padavan/user/Makefile -O user/Makefile
           sed -i '$a\export SSL_CERT_FILE=/usr/lib/cacert.pem' user/scripts/profile
 
           # xray
           mkdir -p user/xray
-          wget -P user/xray/ https://raw.githubusercontent.com/felix-fly/v2ray-padavan-doh/master/padavan/xray/Makefile
+          wget https://raw.githubusercontent.com/felix-fly/v2ray-padavan-doh/master/padavan/xray/Makefile -O user/xray/Makefile
           fakeroot ./build_firmware_modify K2P-USB
           mv /opt/rt-n56u/trunk/images/*.trx /opt/bin/firmware_k2p_USB.trx
       - name: Upload artifact
