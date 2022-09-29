@@ -30,7 +30,7 @@ jobs:
           mkdir -p user/smartdns
           wget -P user/smartdns/ https://raw.githubusercontent.com/felix-fly/v2ray-padavan-doh/master/padavan/smartdns/Makefile
           wget https://raw.githubusercontent.com/felix-fly/v2ray-padavan-doh/master/padavan/user/Makefile -O user/Makefile
-          sed -i '$a\export SSL_CERT_FILE=/usr/lib/cacert.pem' user/scripts/profile
+          sed -i '$a\export SSL_CERT_FILE=/usr/lib/cacert.pem' /opt/rt-n56u/trunk/user/scripts/profile
 
           # xray
           mkdir -p user/xray
