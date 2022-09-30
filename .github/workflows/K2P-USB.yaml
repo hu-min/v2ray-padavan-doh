@@ -27,11 +27,15 @@ jobs:
           sed -i 's/size_etc="6M"/size_etc="12M"/g' user/scripts/dev_init.sh
           wget https://raw.githubusercontent.com/hanwckf/rt-n56u/master/trunk/user/www/n56u_ribbon_fixed/bootstrap/img/asus_logo.png  -O user/www/n56u_ribbon_fixed/bootstrap/img/asus_logo.png
           wget https://raw.githubusercontent.com/hanwckf/rt-n56u/master/trunk/user/scripts/banner -O user/scripts/banner
-          sed -i '/#wing resume/a\ip6tables -A INPUT -p tcp --dport 22 -j ACCEPT' user/scripts/mtd_storage.sh
-          sed -i '/#wing resume/a\ip6tables -A OUTPUT -p tcp --sport 22 -j ACCEPT' user/scripts/mtd_storage.sh
-          sed -i '/#wing resume/a\ip6tables -A INPUT -p tcp --dport 80 -j ACCEPT' user/scripts/mtd_storage.sh
-          sed -i '/#wing resume/a\ip6tables -A OUTPUT -p tcp --sport 80 -j ACCEPT' user/scripts/mtd_storage.sh
-          
+          #sed -i '/#wing resume/a\ip6tables -A INPUT -p tcp --dport 22 -j ACCEPT' user/scripts/mtd_storage.sh
+          #sed -i '/#wing resume/a\ip6tables -A OUTPUT -p tcp --sport 22 -j ACCEPT' user/scripts/mtd_storage.sh
+          #sed -i '/#wing resume/a\ip6tables -A INPUT -p tcp --dport 80 -j ACCEPT' user/scripts/mtd_storage.sh
+          #sed -i '/#wing resume/a\ip6tables -A OUTPUT -p tcp --sport 80 -j ACCEPT' user/scripts/mtd_storage.sh
+          wget https://raw.githubusercontent.com/hanwckf/rt-n56u/master/trunk/user/shared/defaults.h -O user/shared/defaults.h
+          sed -i "s/1234567890/25103515/g" user/shared/defaults.h
+          sed -i "s/FIRMWARE_BUILDS_REV=[0-9]*/FIRMWARE_BUILDS_REV=$(date "+%Y%m%d")/g" ./versions.inc
+          sed -i "s/ntp1.aliyun.com/ntp.ntsc.ac.cn/g" user/shared/defaults.h
+          sed -i "s/2001:470:0:50::2/cn.ntp.org.cn/g" user/shared/defaults.h
 
           # build-in smartdns
           mkdir -p user/smartdns
