@@ -32,10 +32,16 @@ jobs:
           #sed -i '/#wing resume/a\ip6tables -A INPUT -p tcp --dport 80 -j ACCEPT' user/scripts/mtd_storage.sh
           #sed -i '/#wing resume/a\ip6tables -A OUTPUT -p tcp --sport 80 -j ACCEPT' user/scripts/mtd_storage.sh
           wget https://raw.githubusercontent.com/hanwckf/rt-n56u/master/trunk/user/shared/defaults.h -O user/shared/defaults.h
-          sed -i "s/1234567890/25103515/g" user/shared/defaults.h
           sed -i "s/FIRMWARE_BUILDS_REV=[0-9]*/FIRMWARE_BUILDS_REV=$(date "+%Y%m%d")/g" ./versions.inc
           sed -i "s/ntp1.aliyun.com/ntp.ntsc.ac.cn/g" user/shared/defaults.h
           sed -i "s/2001:470:0:50::2/cn.ntp.org.cn/g" user/shared/defaults.h
+          sed -i 's/{ "wan_proto", "dhcp" }/{ "wan_proto", "pppoe" }/g' user/shared/defaults.c
+          sed -i 's/{ "wan_pppoe_username", "" }/{ "wan_pppoe_username", "${{ secrets.PPPOE_ID }}" }/g' user/shared/defaults.c
+          sed -i 's/{ "wan_pppoe_passwd", "" }/{ "wan_pppoe_passwd", "${{ secrets.PPPOE_PWD}}" }/g' user/shared/defaults.c
+          sed -i 's/DEF_WLAN_2G_SSID	BOARD_PID "_%s"/DEF_WLAN_2G_SSID	"${{ secrets.WIFI_NAME }}"/g' user/shared/defaults.h
+          sed -i 's/DEF_WLAN_5G_SSID	BOARD_PID "_5G_%s"/DEF_WLAN_5G_SSID	"${{ secrets.WIFI_NAME }}"/g' user/shared/defaults.h
+          sed -i 's/DEF_WLAN_2G_PSK		"1234567890"/DEF_WLAN_2G_PSK		"${{ secrets.WIFI_PWD }}"/g' user/shared/defaults.h
+          sed -i 's/DEF_WLAN_5G_PSK		"1234567890"/DEF_WLAN_5G_PSK		"${{ secrets.WIFI_PWD }}"/g' user/shared/defaults.h
 
           # build-in smartdns
           mkdir -p user/smartdns
@@ -52,3 +58,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           path: /opt/bin
+          name: artifact
