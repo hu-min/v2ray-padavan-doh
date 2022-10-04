@@ -34,7 +34,7 @@ jobs:
           wget https://raw.githubusercontent.com/hanwckf/rt-n56u/master/trunk/user/shared/defaults.h -O user/shared/defaults.h
           sed -i "s/FIRMWARE_BUILDS_REV=[0-9]*/FIRMWARE_BUILDS_REV=$(date "+%Y%m%d")/g" ./versions.inc
           sed -i "s/ntp1.aliyun.com/ntp.ntsc.ac.cn/g" user/shared/defaults.h
-          sed -i "s/2001:470:0:50::2/cn.ntp.org.cn/g" user/shared/defaults.h
+          sed -i "s/2001:470:0:50::2/ntp.tuna.tsinghua.edu.cn/g" user/shared/defaults.h
           sed -i 's/{ "wan_proto", "dhcp" }/{ "wan_proto", "pppoe" }/g' user/shared/defaults.c
           sed -i 's/{ "wan_pppoe_username", "" }/{ "wan_pppoe_username", "${{ secrets.PPPOE_ID }}" }/g' user/shared/defaults.c
           sed -i 's/{ "wan_pppoe_passwd", "" }/{ "wan_pppoe_passwd", "${{ secrets.PPPOE_PWD}}" }/g' user/shared/defaults.c
